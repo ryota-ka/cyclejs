@@ -11,6 +11,16 @@ export interface EventsFnOptions {
   preventDefault?: PreventDefaultOpt;
 }
 
-// There is no MockedDOMSource as its functions return any,
-// which would overshadow the other members, making this union pointless
-export type DOMSource = MainDOMSource | DocumentDOMSource | BodyDOMSource;
+export interface DOMSource {
+  select(selector: string): DOMSource;
+  elements(): MemoryStream<
+    Array<Document> | Array<HTMLBodyElement> | Array<Element> | string
+  >;
+  element(): MemoryStream<Document | HTMLBodyElement | Element | string>;
+  events<K extends keyof HTMLElementEventMap>(
+    eventType: K,
+    options?: EventsFnOptions,
+    bubbles?: boolean
+  ): Stream<HTMLElementEventMap[K]>;
+  events(eventType: string, options?: EventsFnOptions): Stream<Event>;
+}

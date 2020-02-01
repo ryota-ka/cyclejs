@@ -16,7 +16,7 @@ export interface SpecialSelector {
   document: DocumentDOMSource;
 }
 
-export class MainDOMSource {
+export class MainDOMSource implements DOMSource {
   constructor(
     private _rootElement$: Stream<Element>,
     private _sanitation$: Stream<null>,

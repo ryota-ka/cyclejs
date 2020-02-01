@@ -10,7 +10,7 @@ export type MockConfig = {
 
 const SCOPE_PREFIX = '___';
 
-export class MockedDOMSource {
+export class MockedDOMSource implements DOMSource {
   private _elements: FantasyObservable<any>;
 
   constructor(private _mockConfig: MockConfig) {
